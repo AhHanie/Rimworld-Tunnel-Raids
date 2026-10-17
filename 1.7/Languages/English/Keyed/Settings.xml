@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+    <TunnelRaids.LoadingLabel>Tunnel Raids Loading</TunnelRaids.LoadingLabel>
+    <TunnelRaids.SettingsTitle>Tunnel Raids</TunnelRaids.SettingsTitle>
+
+    <TunnelRaids.Settings.FactionsHeading>Factions</TunnelRaids.Settings.FactionsHeading>
+    <TunnelRaids.Settings.FactionsHint>Only checked factions can use tunnels. Leave all unchecked to allow every eligible hostile humanlike faction.</TunnelRaids.Settings.FactionsHint>
+    <TunnelRaids.Settings.XenotypesHeading>Xenotypes</TunnelRaids.Settings.XenotypesHeading>
+    <TunnelRaids.Settings.XenotypesHint>This filter chooses factions that can naturally generate a selected xenotype. Tunnel raiders may also have other xenotypes.</TunnelRaids.Settings.XenotypesHint>
+    <TunnelRaids.Settings.XenotypesOverrideHint>All humanlike tunnel raiders will be generated with the single chosen xenotype, even if their faction would not naturally generate it.</TunnelRaids.Settings.XenotypesOverrideHint>
+    <TunnelRaids.Settings.BiotechRequired>Xenotype filters require the Biotech DLC, which is not active.</TunnelRaids.Settings.BiotechRequired>
+    <TunnelRaids.Settings.OverrideLabel>Override tunnel raiders' xenotype</TunnelRaids.Settings.OverrideLabel>
+    <TunnelRaids.Settings.OverrideTooltip>Forces the selected xenotype on humanlike pawns generated for tunnel raids from any otherwise eligible humanlike faction. Other arrival modes are not affected.</TunnelRaids.Settings.OverrideTooltip>
+    <TunnelRaids.Settings.OverrideDisabledTooltip>Select exactly one xenotype that can generate as a combatant to enable this option.</TunnelRaids.Settings.OverrideDisabledTooltip>
+    <TunnelRaids.Settings.MessagesHeading>Messages</TunnelRaids.Settings.MessagesHeading>
+    <TunnelRaids.Settings.NoMessages>No problems found.</TunnelRaids.Settings.NoMessages>
+
+    <TunnelRaids.Severity.Error>Error</TunnelRaids.Severity.Error>
+    <TunnelRaids.Severity.Warning>Warning</TunnelRaids.Severity.Warning>
+    <TunnelRaids.Severity.Info>Note</TunnelRaids.Severity.Info>
+
+    <TunnelRaids.FactionIssue.PlayerFaction>This is a player faction and never raids.</TunnelRaids.FactionIssue.PlayerFaction>
+    <TunnelRaids.FactionIssue.NotHumanlike>This faction is not humanlike, so it cannot use tunnels.</TunnelRaids.FactionIssue.NotHumanlike>
+    <TunnelRaids.FactionIssue.RaidsForbidden>Raids from this faction are forbidden.</TunnelRaids.FactionIssue.RaidsForbidden>
+    <TunnelRaids.FactionIssue.NoCombatGroups>This faction has no combat pawn groups, so it cannot raid.</TunnelRaids.FactionIssue.NoCombatGroups>
+    <TunnelRaids.XenotypeIssue.NotCombatant>This xenotype cannot generate as a combatant, so it never appears in raids and cannot be used for the override.</TunnelRaids.XenotypeIssue.NotCombatant>
+
+    <TunnelRaids.Message.FactionNoNaturalMatch>{0} cannot naturally generate any selected xenotype, so it cannot use tunnels. Select a xenotype it can generate, uncheck {0}, or use the override.</TunnelRaids.Message.FactionNoNaturalMatch>
+    <TunnelRaids.Message.NoFactionMatchesXenotypes>No hostile humanlike faction can naturally generate the selected xenotypes, so natural tunnel raids will not occur. Select more xenotypes or use the override.</TunnelRaids.Message.NoFactionMatchesXenotypes>
+    <TunnelRaids.Message.OverrideNotCombatant>{0} cannot generate as a combatant, so it cannot be used for the override and no faction raids with it naturally. Select a different xenotype.</TunnelRaids.Message.OverrideNotCombatant>
+    <TunnelRaids.Message.OverrideDisabledMultiple>The override was turned off because it needs exactly one selected xenotype. Select a single xenotype to enable it again.</TunnelRaids.Message.OverrideDisabledMultiple>
+    <TunnelRaids.Message.FactionUnusable>{0} is selected but cannot send tunnel raids. {1}</TunnelRaids.Message.FactionUnusable>
+    <TunnelRaids.Message.FactionNotInWorld>{0} is selected but no faction of that type exists in the current world, so it cannot raid here.</TunnelRaids.Message.FactionNotInWorld>
+    <TunnelRaids.Message.XenotypeScopeNotice>The xenotype filter only decides which factions can use tunnels. Eligible factions can still send raiders of other xenotypes.</TunnelRaids.Message.XenotypeScopeNotice>
+    <TunnelRaids.Message.EstimateNotice>No game is running, so natural xenotype matches are estimated from loaded definitions. A faction's ideology in a running world can change them.</TunnelRaids.Message.EstimateNotice>
+</LanguageData>

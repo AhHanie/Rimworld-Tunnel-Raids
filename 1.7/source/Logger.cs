@@ -24,6 +24,16 @@ namespace Tunnel_Raids
             Log.Warning(Prefix + message);
         }
 
+        private static readonly HashSet<string> loggedOnce = new HashSet<string>();
+
+        public static void WarningOnce(string key, string message)
+        {
+            if (loggedOnce.Add(key))
+            {
+                Log.Warning(Prefix + message);
+            }
+        }
+
         public static void Error(string message)
         {
             Log.Error(Prefix + message);

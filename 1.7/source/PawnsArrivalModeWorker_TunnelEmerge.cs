@@ -16,7 +16,7 @@ namespace Tunnel_Raids
                 return false;
             }
             Faction faction = parms.faction;
-            return faction == null || (faction.def.humanlikeFaction && faction.HostileTo(Faction.OfPlayer));
+            return faction == null || (faction.def.humanlikeFaction && faction.HostileTo(Faction.OfPlayer) && TunnelRaidEligibility.IsFactionAllowed(faction));
         }
 
         public override bool CanUseOnMap(Map map)
@@ -26,6 +26,12 @@ namespace Tunnel_Raids
 
         public override bool TryResolveRaidSpawnCenter(IncidentParms parms)
         {
+            if (!TunnelRaidEligibility.IsFactionAllowed(parms.faction))
+            {
+                Logger.Warning("Faction " + parms.faction.def.defName + " is not allowed to use tunnels, falling back to EdgeWalkIn");
+                parms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
+                return parms.raidArrivalMode.Worker.TryResolveRaidSpawnCenter(parms);
+            }
             Map map = (Map)parms.target;
             if (parms.spawnCenter.IsValid || TunnelSiteFinder.TryFindRoot(map, parms, out parms.spawnCenter))
             {

@@ -4,9 +4,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>Tunnel Raids</AssemblyName>
     <RootNamespace>Tunnel_Raids</RootNamespace>
-    <Product>Tunnel Raids</Product>
-    <Copyright>Copyright © 2026</Copyright>
-    <Version>1.0.0</Version>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <Deterministic>true</Deterministic>
@@ -15,6 +13,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>..\Assemblies\</OutputPath>
     <RimWorldDir Condition="'$(RimWorldDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\RimWorld</RimWorldDir>
+    <HarmonyDll Condition="'$(HarmonyDll)' == ''">C:\Me\Games\Rimworld\Harmony\1.7\0Harmony.dll</HarmonyDll>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DebugType>embedded</DebugType>
@@ -30,10 +29,12 @@
     <Reference Include="Assembly-CSharp"><HintPath>$(RimWorldDir)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityStubs"><HintPath>$(RimWorldDir)\UnityStubs.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="Waylith"><HintPath>$(RimWorldDir)\Waylith.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(HarmonyDll)</HintPath><Private>false</Private></Reference>
   </ItemGroup>
   <Target Name="CheckGameReferences" BeforeTargets="ResolveAssemblyReferences;CoreCompile">
     <Error Condition="!Exists('$(RimWorldDir)\Assembly-CSharp.dll')" Text="Assembly-CSharp.dll missing from RimWorldDir" />
     <Error Condition="!Exists('$(RimWorldDir)\UnityStubs.dll')" Text="UnityStubs.dll missing from RimWorldDir" />
     <Error Condition="!Exists('$(RimWorldDir)\Waylith.dll')" Text="Waylith.dll missing from RimWorldDir" />
+    <Error Condition="!Exists('$(HarmonyDll)')" Text="Harmony 1.7 DLL missing from HarmonyDll" />
   </Target>
 </Project>
