@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/RaidStrategyDef[defName="ImmediateAttack" or defName="ImmediateAttackSmart"]/arriveModes</xpath>
+    <value>
+      <li>TR_TunnelEmerge</li>
+    </value>
+  </Operation>
+
+</Patch>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnsArrivalModeDef>
+    <defName>TR_TunnelEmerge</defName>
+    <workerClass>Tunnel_Raids.PawnsArrivalModeWorker_TunnelEmerge</workerClass>
+    <canBeBackup>false</canBeBackup>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <selectionWeightCurve>
+      <points>
+        <li>(400, 0)</li>
+        <li>(1000, 0.4)</li>
+        <li>(3000, 0.6)</li>
+      </points>
+    </selectionWeightCurve>
+    <pointsFactorCurve>
+      <points>
+        <li>0, 0.65</li>
+        <li>5000, 0.4</li>
+      </points>
+    </pointsFactorCurve>
+    <textEnemy>The ground is shaking. A group of {0} from {1} are tunneling up from beneath your colony!</textEnemy>
+    <textWillArrive>{0_pawnsPluralDef} will tunnel up from beneath the colony.</textWillArrive>
+  </PawnsArrivalModeDef>
+
+</Defs>
