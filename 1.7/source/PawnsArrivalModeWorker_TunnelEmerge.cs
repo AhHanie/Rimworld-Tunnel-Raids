@@ -9,6 +9,8 @@ namespace Tunnel_Raids
     {
         private const int PawnsPerTunnel = 5;
 
+        private bool IsMechMode => def == TR_PawnsArrivalModeDefOf.TR_MechTunnelEmerge;
+
         public override bool CanUseWith(IncidentParms parms)
         {
             if (!base.CanUseWith(parms))
@@ -16,6 +18,14 @@ namespace Tunnel_Raids
                 return false;
             }
             Faction faction = parms.faction;
+            if (IsMechMode)
+            {
+                return ModsConfig.BiotechActive
+                    && ModSettings.enableMechanoidTunnelRaids
+                    && faction != null
+                    && faction.def == FactionDefOf.Mechanoid
+                    && faction.HostileTo(Faction.OfPlayer);
+            }
             return faction == null || (faction.def.humanlikeFaction && faction.HostileTo(Faction.OfPlayer) && TunnelRaidEligibility.IsFactionAllowed(faction));
         }
 
@@ -26,7 +36,7 @@ namespace Tunnel_Raids
 
         public override bool TryResolveRaidSpawnCenter(IncidentParms parms)
         {
-            if (!TunnelRaidEligibility.IsFactionAllowed(parms.faction))
+            if (!IsMechMode && !TunnelRaidEligibility.IsFactionAllowed(parms.faction))
             {
                 Logger.Warning("Faction " + parms.faction.def.defName + " is not allowed to use tunnels, falling back to EdgeWalkIn");
                 parms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;

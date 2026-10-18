@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Used only by TR_MechTunnelAttack. No pointsFactorCurve: the strategy's curve already reduces the budget. -->
+  <PawnsArrivalModeDef>
+    <defName>TR_MechTunnelEmerge</defName>
+    <workerClass>Tunnel_Raids.PawnsArrivalModeWorker_TunnelEmerge</workerClass>
+    <canBeBackup>false</canBeBackup>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <selectionWeightCurve>
+      <points>
+        <li>(0, 1)</li>
+      </points>
+    </selectionWeightCurve>
+    <textEnemy>The ground is shaking. A group of {0} from {1} are burrowing up from beneath your colony!</textEnemy>
+    <textWillArrive>{0_pawnsPluralDef} will burrow up from beneath the colony.</textWillArrive>
+  </PawnsArrivalModeDef>
+
+</Defs>

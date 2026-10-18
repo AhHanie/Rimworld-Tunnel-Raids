@@ -12,9 +12,12 @@ namespace Tunnel_Raids
 
         public static bool overrideTunnelXenotype = false;
 
+        public static bool enableMechanoidTunnelRaids = true;
+
         public override void ExposeData()
         {
             base.ExposeData();
+            Scribe_Values.Look(ref enableMechanoidTunnelRaids, "enableMechanoidTunnelRaids", true);
             Scribe_Collections.Look(ref selectedFactionDefNames, "selectedFactionDefNames", LookMode.Value);
             Scribe_Collections.Look(ref selectedXenotypeDefNames, "selectedXenotypeDefNames", LookMode.Value);
             Scribe_Values.Look(ref overrideTunnelXenotype, "overrideTunnelXenotype", false);

@@ -7,6 +7,9 @@ namespace Tunnel_Raids
     {
         public static PawnsArrivalModeDef TR_TunnelEmerge;
 
+        [MayRequireBiotech]
+        public static PawnsArrivalModeDef TR_MechTunnelEmerge;
+
         static TR_PawnsArrivalModeDefOf()
         {
             DefOfHelper.EnsureInitializedInCtor(typeof(TR_PawnsArrivalModeDefOf));

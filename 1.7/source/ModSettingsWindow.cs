@@ -54,8 +54,10 @@ namespace Tunnel_Raids
             EnsureSortedLists();
             RefreshMessagesIfNeeded();
 
+            float columnsTop = DrawMechanoidSection(inRect);
+
             Rect messagesRect = new Rect(inRect.x, inRect.yMax - MessagesHeight, inRect.width, MessagesHeight);
-            Rect topRect = new Rect(inRect.x, inRect.y, inRect.width, inRect.height - MessagesHeight - Gap);
+            Rect topRect = new Rect(inRect.x, columnsTop, inRect.width, messagesRect.y - Gap - columnsTop);
             float columnWidth = (topRect.width - Gap) / 2f;
             Rect leftRect = new Rect(topRect.x, topRect.y, columnWidth, topRect.height);
             Rect rightRect = new Rect(leftRect.xMax + Gap, topRect.y, columnWidth, topRect.height);
@@ -92,6 +94,26 @@ namespace Tunnel_Raids
         private static string DisplayName(Def def)
         {
             return def.label.NullOrEmpty() ? def.defName : def.LabelCap.Resolve();
+        }
+
+        private static float DrawMechanoidSection(Rect inRect)
+        {
+            bool biotech = ModsConfig.BiotechActive;
+            Rect checkboxRect = new Rect(inRect.x, inRect.y, inRect.width, RowHeight);
+            bool value = ModSettings.enableMechanoidTunnelRaids;
+            Widgets.CheckboxLabeled(checkboxRect, "TunnelRaids.Settings.MechanoidLabel".Translate(), ref value, disabled: !biotech);
+            TooltipHandler.TipRegion(checkboxRect, "TunnelRaids.Settings.MechanoidTooltip".Translate());
+            if (biotech)
+            {
+                ModSettings.enableMechanoidTunnelRaids = value;
+            }
+
+            float y = checkboxRect.yMax + 4f;
+            if (!biotech)
+            {
+                y += DrawHint(new Rect(inRect.x, y, inRect.width, 0f), "TunnelRaids.Settings.MechanoidBiotechRequired".Translate());
+            }
+            return y + Gap;
         }
 
         private static void DrawFactionColumn(Rect rect)

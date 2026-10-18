@@ -3,8 +3,12 @@
     <TunnelRaids.LoadingLabel>Tunnel Raids Loading</TunnelRaids.LoadingLabel>
     <TunnelRaids.SettingsTitle>Tunnel Raids</TunnelRaids.SettingsTitle>
 
-    <TunnelRaids.Settings.FactionsHeading>Factions</TunnelRaids.Settings.FactionsHeading>
-    <TunnelRaids.Settings.FactionsHint>Only checked factions can use tunnels. Leave all unchecked to allow every eligible hostile humanlike faction.</TunnelRaids.Settings.FactionsHint>
+    <TunnelRaids.Settings.MechanoidLabel>Enable mechanoid tunnel raids</TunnelRaids.Settings.MechanoidLabel>
+    <TunnelRaids.Settings.MechanoidTooltip>Mechanoid raids can burrow up from beneath the colony. Every such raid includes at least one tunneler mech, and its pawn budget is reduced like human tunnel raids. Requires the Biotech DLC. This is independent of the faction and xenotype selections below, which only affect humanlike raids.</TunnelRaids.Settings.MechanoidTooltip>
+    <TunnelRaids.Settings.MechanoidBiotechRequired>Mechanoid tunnel raids require the Biotech DLC, which is not active. Your choice is kept for when it is.</TunnelRaids.Settings.MechanoidBiotechRequired>
+
+    <TunnelRaids.Settings.FactionsHeading>Factions (humanlike raids)</TunnelRaids.Settings.FactionsHeading>
+    <TunnelRaids.Settings.FactionsHint>Only checked factions can use tunnels. Leave all unchecked to allow every eligible hostile humanlike faction. Mechanoid tunnel raids ignore this list.</TunnelRaids.Settings.FactionsHint>
     <TunnelRaids.Settings.XenotypesHeading>Xenotypes</TunnelRaids.Settings.XenotypesHeading>
     <TunnelRaids.Settings.XenotypesHint>This filter chooses factions that can naturally generate a selected xenotype. Tunnel raiders may also have other xenotypes.</TunnelRaids.Settings.XenotypesHint>
     <TunnelRaids.Settings.XenotypesOverrideHint>All humanlike tunnel raiders will be generated with the single chosen xenotype, even if their faction would not naturally generate it.</TunnelRaids.Settings.XenotypesOverrideHint>

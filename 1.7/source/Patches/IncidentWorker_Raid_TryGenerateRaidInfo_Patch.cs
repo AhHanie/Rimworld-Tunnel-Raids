@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 using RimWorld;
 
@@ -12,12 +13,19 @@ namespace Tunnel_Raids.Patches
             __state = true;
         }
 
-        private static void Finalizer(bool __state)
+        private static Exception Finalizer(bool __state, Exception __exception, ref bool __result)
         {
             if (__state && TunnelRaidOverride.contexts.Count > 0)
             {
                 TunnelRaidOverride.contexts.Pop();
             }
+            if (__exception is MechTunnelRaidException)
+            {
+                Logger.Exception(__exception, "Mechanoid tunnel raid failed");
+                __result = false;
+                return null;
+            }
+            return __exception;
         }
     }
 }
