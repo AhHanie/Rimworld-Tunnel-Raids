@@ -43,12 +43,18 @@ namespace Tunnel_Raids
                 return parms.raidArrivalMode.Worker.TryResolveRaidSpawnCenter(parms);
             }
             Map map = (Map)parms.target;
-            if (parms.spawnCenter.IsValid || TunnelSiteFinder.TryFindRoot(map, parms, out parms.spawnCenter))
+            if (TunnelSiteFinder.IsValidSpawnCenter(map, parms.spawnCenter) || TunnelSiteFinder.TryFindRoot(map, parms, out parms.spawnCenter))
             {
                 parms.spawnRotation = Rot4.Random;
                 return true;
             }
             Logger.Warning("No tunnel site found, falling back to EdgeWalkIn");
+            return ResolveEdgeWalkIn(parms);
+        }
+
+        private static bool ResolveEdgeWalkIn(IncidentParms parms)
+        {
+            parms.spawnCenter = IntVec3.Invalid;
             parms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
             return parms.raidArrivalMode.Worker.TryResolveRaidSpawnCenter(parms);
         }
@@ -56,6 +62,17 @@ namespace Tunnel_Raids
         public override void Arrive(List<Pawn> pawns, IncidentParms parms)
         {
             Map map = (Map)parms.target;
+            if (!TunnelSiteFinder.IsValidSpawnCenter(map, parms.spawnCenter) && !TunnelSiteFinder.TryFindRoot(map, parms, out parms.spawnCenter))
+            {
+                Logger.Warning("Tunnel site became invalid, arriving via EdgeWalkIn");
+                if (!ResolveEdgeWalkIn(parms))
+                {
+                    Logger.Error("No arrival cell found for tunnel raiders");
+                    return;
+                }
+                parms.raidArrivalMode.Worker.Arrive(pawns, parms);
+                return;
+            }
             int wanted = Mathf.Clamp((pawns.Count + PawnsPerTunnel - 1) / PawnsPerTunnel, 1, TunnelSiteFinder.MaxTunnels);
             List<IntVec3> cells = TunnelSiteFinder.ChooseCells(map, parms.spawnCenter, wanted);
             int count = cells.Count;

@@ -14,10 +14,16 @@ namespace Tunnel_Raids
 
         public static bool enableMechanoidTunnelRaids = true;
 
+        public static bool blockMuddyTunnelSites = false;
+
+        public static bool blockRockyTunnelSites = false;
+
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_Values.Look(ref enableMechanoidTunnelRaids, "enableMechanoidTunnelRaids", true);
+            Scribe_Values.Look(ref blockMuddyTunnelSites, "blockMuddyTunnelSites", false);
+            Scribe_Values.Look(ref blockRockyTunnelSites, "blockRockyTunnelSites", false);
             Scribe_Collections.Look(ref selectedFactionDefNames, "selectedFactionDefNames", LookMode.Value);
             Scribe_Collections.Look(ref selectedXenotypeDefNames, "selectedXenotypeDefNames", LookMode.Value);
             Scribe_Values.Look(ref overrideTunnelXenotype, "overrideTunnelXenotype", false);

@@ -15,6 +15,18 @@ namespace Tunnel_Raids
         private const int MinAnchorDistSq = 9;
         private const int MinSpacingSq = 9;
 
+        private static readonly HashSet<string> MuddyTerrainDefNames = new HashSet<string>
+        {
+            "MarshyTerrain",
+            "MarshFlood"
+        };
+
+        private static readonly HashSet<string> RockyTerrainDefNames = new HashSet<string>
+        {
+            "TileSandstone", "TileGranite", "TileLimestone", "TileSlate", "TileMarble",
+            "FlagstoneSandstone", "FlagstoneGranite", "FlagstoneLimestone", "FlagstoneSlate", "FlagstoneMarble"
+        };
+
         private static readonly List<IntVec3> chosen = new List<IntVec3>(MaxTunnels);
 
         public static bool TryFindRoot(Map map, IncidentParms parms, out IntVec3 root)
@@ -53,11 +65,40 @@ namespace Tunnel_Raids
             return chosen;
         }
 
-        private static bool IsValidRoot(IntVec3 c, IntVec3 anchor, Map map)
+        public static bool IsValidSpawnCenter(Map map, IntVec3 c)
         {
-            return c.DistanceToSquared(anchor) >= MinAnchorDistSq
+            return c.IsValid
+                && c.InBounds(map)
                 && IsOpenGround(c, map)
                 && map.reachability.CanReachMapEdge(c, TraverseParms.For(TraverseMode.PassDoors));
+        }
+
+        public static bool IsTerrainAllowed(TerrainDef terrain)
+        {
+            if (ModSettings.blockMuddyTunnelSites && IsMuddy(terrain))
+            {
+                return false;
+            }
+            return !(ModSettings.blockRockyTunnelSites && IsRocky(terrain));
+        }
+
+        private static bool IsMuddy(TerrainDef terrain)
+        {
+            return terrain.HasTag("Mud")
+                || terrain.HasTag("WaterMarshy")
+                || MuddyTerrainDefNames.Contains(terrain.defName);
+        }
+
+        private static bool IsRocky(TerrainDef terrain)
+        {
+            return terrain.IsRock
+                || terrain.categoryType == TerrainDef.TerrainCategoryType.Stone
+                || RockyTerrainDefNames.Contains(terrain.defName);
+        }
+
+        private static bool IsValidRoot(IntVec3 c, IntVec3 anchor, Map map)
+        {
+            return c.DistanceToSquared(anchor) >= MinAnchorDistSq && IsValidSpawnCenter(map, c);
         }
 
         private static bool IsValidChild(IntVec3 c, Map map)
@@ -78,10 +119,13 @@ namespace Tunnel_Raids
 
         private static bool IsOpenGround(IntVec3 c, Map map)
         {
-            return c.Standable(map)
-                && !c.Fogged(map)
-                && c.GetEdifice(map) == null
-                && !c.GetTerrain(map).IsWater
+            if (!c.Standable(map) || c.Fogged(map) || c.GetEdifice(map) != null)
+            {
+                return false;
+            }
+            TerrainDef terrain = c.GetTerrain(map);
+            return !terrain.IsWater
+                && IsTerrainAllowed(terrain)
                 && c.GetFirstThing(map, TR_ThingDefOf.TR_TunnelRaidSpawner) == null;
         }
     }

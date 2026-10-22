@@ -54,10 +54,10 @@ namespace Tunnel_Raids
             EnsureSortedLists();
             RefreshMessagesIfNeeded();
 
-            float columnsTop = DrawMechanoidSection(inRect);
+            float columnsTop = DrawTunnelOptions(inRect);
 
             Rect messagesRect = new Rect(inRect.x, inRect.yMax - MessagesHeight, inRect.width, MessagesHeight);
-            Rect topRect = new Rect(inRect.x, columnsTop, inRect.width, messagesRect.y - Gap - columnsTop);
+            Rect topRect = new Rect(inRect.x, columnsTop, inRect.width, Mathf.Max(0f, messagesRect.y - Gap - columnsTop));
             float columnWidth = (topRect.width - Gap) / 2f;
             Rect leftRect = new Rect(topRect.x, topRect.y, columnWidth, topRect.height);
             Rect rightRect = new Rect(leftRect.xMax + Gap, topRect.y, columnWidth, topRect.height);
@@ -96,6 +96,22 @@ namespace Tunnel_Raids
             return def.label.NullOrEmpty() ? def.defName : def.LabelCap.Resolve();
         }
 
+        private static float DrawTunnelOptions(Rect inRect)
+        {
+            float y = DrawMechanoidSection(inRect);
+            y = DrawTerrainCheckbox(inRect, y, ref ModSettings.blockMuddyTunnelSites, "TunnelRaids.Settings.BlockMuddyLabel", "TunnelRaids.Settings.BlockMuddyTooltip");
+            y = DrawTerrainCheckbox(inRect, y, ref ModSettings.blockRockyTunnelSites, "TunnelRaids.Settings.BlockRockyLabel", "TunnelRaids.Settings.BlockRockyTooltip");
+            return y + Gap;
+        }
+
+        private static float DrawTerrainCheckbox(Rect inRect, float y, ref bool setting, string labelKey, string tooltipKey)
+        {
+            Rect rect = new Rect(inRect.x, y, inRect.width, RowHeight);
+            Widgets.CheckboxLabeled(rect, labelKey.Translate(), ref setting);
+            TooltipHandler.TipRegion(rect, tooltipKey.Translate());
+            return rect.yMax + 4f;
+        }
+
         private static float DrawMechanoidSection(Rect inRect)
         {
             bool biotech = ModsConfig.BiotechActive;
@@ -113,7 +129,7 @@ namespace Tunnel_Raids
             {
                 y += DrawHint(new Rect(inRect.x, y, inRect.width, 0f), "TunnelRaids.Settings.MechanoidBiotechRequired".Translate());
             }
-            return y + Gap;
+            return y;
         }
 
         private static void DrawFactionColumn(Rect rect)

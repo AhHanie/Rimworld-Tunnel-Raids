@@ -7,6 +7,11 @@
     <TunnelRaids.Settings.MechanoidTooltip>Mechanoid raids can burrow up from beneath the colony. Every such raid includes at least one tunneler mech, and its pawn budget is reduced like human tunnel raids. Requires the Biotech DLC. This is independent of the faction and xenotype selections below, which only affect humanlike raids.</TunnelRaids.Settings.MechanoidTooltip>
     <TunnelRaids.Settings.MechanoidBiotechRequired>Mechanoid tunnel raids require the Biotech DLC, which is not active. Your choice is kept for when it is.</TunnelRaids.Settings.MechanoidBiotechRequired>
 
+    <TunnelRaids.Settings.BlockMuddyLabel>Block tunnel entrances on muddy terrain</TunnelRaids.Settings.BlockMuddyLabel>
+    <TunnelRaids.Settings.BlockMuddyTooltip>Tunnel entrances will not open on mud, marshy soil, marsh or marsh flooding. The visible surface counts, so a floor built over mud is judged as that floor. Applies to humanlike and mechanoid tunnel raids. If no allowed spot exists, the raid arrives from the map edge instead. Raiders can still walk and fight on this terrain once they are out.</TunnelRaids.Settings.BlockMuddyTooltip>
+    <TunnelRaids.Settings.BlockRockyLabel>Block tunnel entrances on rocky terrain</TunnelRaids.Settings.BlockRockyLabel>
+    <TunnelRaids.Settings.BlockRockyTooltip>Tunnel entrances will not open on rough, rough-hewn or smoothed rock, volcanic rock, stone tile or flagstone floors. The visible surface counts, so a floor built over rock is judged as that floor. Applies to humanlike and mechanoid tunnel raids. If no allowed spot exists, the raid arrives from the map edge instead. Raiders can still walk and fight on this terrain once they are out.</TunnelRaids.Settings.BlockRockyTooltip>
+
     <TunnelRaids.Settings.FactionsHeading>Factions (humanlike raids)</TunnelRaids.Settings.FactionsHeading>
     <TunnelRaids.Settings.FactionsHint>Only checked factions can use tunnels. Leave all unchecked to allow every eligible hostile humanlike faction. Mechanoid tunnel raids ignore this list.</TunnelRaids.Settings.FactionsHint>
     <TunnelRaids.Settings.XenotypesHeading>Xenotypes</TunnelRaids.Settings.XenotypesHeading>
