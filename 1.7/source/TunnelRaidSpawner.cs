@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace Tunnel_Raids
@@ -8,7 +9,21 @@ namespace Tunnel_Raids
     {
         private ThingOwner<Pawn> innerContainer;
 
-        protected override IntRange ResultSpawnDelay => def.building.groundSpawnerSpawnDelay;
+        protected override IntRange ResultSpawnDelay => GetScaledSpawnDelay(def.building.groundSpawnerSpawnDelay, ModSettings.tunnelEmergenceDelayPercent);
+
+        public static IntRange GetScaledSpawnDelay(IntRange baseline, int percent)
+        {
+            percent = ModSettings.NormalizeTunnelEmergenceDelayPercent(percent);
+            if (percent == 100)
+            {
+                return baseline;
+            }
+
+            float multiplier = percent / 100f;
+            int first = Mathf.Max(1, Mathf.RoundToInt(baseline.min * multiplier));
+            int second = Mathf.Max(1, Mathf.RoundToInt(baseline.max * multiplier));
+            return new IntRange(Mathf.Min(first, second), Mathf.Max(first, second));
+        }
 
         public TunnelRaidSpawner()
         {

@@ -7,6 +7,10 @@
     <TunnelRaids.Settings.MechanoidTooltip>Mechanoid raids can burrow up from beneath the colony. Every such raid includes at least one tunneler mech, and its pawn budget is reduced like human tunnel raids. Requires the Biotech DLC. This is independent of the faction and xenotype selections below, which only affect humanlike raids.</TunnelRaids.Settings.MechanoidTooltip>
     <TunnelRaids.Settings.MechanoidBiotechRequired>Mechanoid tunnel raids require the Biotech DLC, which is not active. Your choice is kept for when it is.</TunnelRaids.Settings.MechanoidBiotechRequired>
 
+    <TunnelRaids.Settings.EmergenceDelayLabel>Tunnel emergence delay</TunnelRaids.Settings.EmergenceDelayLabel>
+    <TunnelRaids.Settings.EmergenceDelayValue>{0}× ({1}–{2} seconds)</TunnelRaids.Settings.EmergenceDelayValue>
+    <TunnelRaids.Settings.EmergenceDelayTooltip>Time from the tunnel entrance and ground crackling appearing until raiders emerge. Each entrance gets a random wait within the shown range, and the crackling continues throughout. At 1.0×, the default range is 10–15 seconds unless another mod changes it. Changes affect only newly appearing entrances; existing entrances keep their scheduled emergence time. Applies to humanlike and mechanoid tunnel raids.</TunnelRaids.Settings.EmergenceDelayTooltip>
+
     <TunnelRaids.Settings.BlockMuddyLabel>Block tunnel entrances on muddy terrain</TunnelRaids.Settings.BlockMuddyLabel>
     <TunnelRaids.Settings.BlockMuddyTooltip>Tunnel entrances will not open on mud, marshy soil, marsh or marsh flooding. The visible surface counts, so a floor built over mud is judged as that floor. Applies to humanlike and mechanoid tunnel raids. If no allowed spot exists, the raid arrives from the map edge instead. Raiders can still walk and fight on this terrain once they are out.</TunnelRaids.Settings.BlockMuddyTooltip>
     <TunnelRaids.Settings.BlockRockyLabel>Block tunnel entrances on rocky terrain</TunnelRaids.Settings.BlockRockyLabel>

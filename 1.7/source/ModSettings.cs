@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace Tunnel_Raids
@@ -18,18 +19,34 @@ namespace Tunnel_Raids
 
         public static bool blockRockyTunnelSites = false;
 
+        public const int MinTunnelEmergenceDelayPercent = 50;
+
+        public const int MaxTunnelEmergenceDelayPercent = 400;
+
+        public const int TunnelEmergenceDelayStepPercent = 25;
+
+        public static int tunnelEmergenceDelayPercent = 100;
+
+        public static int NormalizeTunnelEmergenceDelayPercent(int value)
+        {
+            value = Mathf.Clamp(value, MinTunnelEmergenceDelayPercent, MaxTunnelEmergenceDelayPercent);
+            return ((value + TunnelEmergenceDelayStepPercent / 2) / TunnelEmergenceDelayStepPercent) * TunnelEmergenceDelayStepPercent;
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_Values.Look(ref enableMechanoidTunnelRaids, "enableMechanoidTunnelRaids", true);
             Scribe_Values.Look(ref blockMuddyTunnelSites, "blockMuddyTunnelSites", false);
             Scribe_Values.Look(ref blockRockyTunnelSites, "blockRockyTunnelSites", false);
+            Scribe_Values.Look(ref tunnelEmergenceDelayPercent, "tunnelEmergenceDelayPercent", 100);
             Scribe_Collections.Look(ref selectedFactionDefNames, "selectedFactionDefNames", LookMode.Value);
             Scribe_Collections.Look(ref selectedXenotypeDefNames, "selectedXenotypeDefNames", LookMode.Value);
             Scribe_Values.Look(ref overrideTunnelXenotype, "overrideTunnelXenotype", false);
 
             if (Scribe.mode != LoadSaveMode.PostLoadInit) return;
 
+            tunnelEmergenceDelayPercent = NormalizeTunnelEmergenceDelayPercent(tunnelEmergenceDelayPercent);
             if (selectedFactionDefNames == null) selectedFactionDefNames = new HashSet<string>();
             if (selectedXenotypeDefNames == null) selectedXenotypeDefNames = new HashSet<string>();
             selectedFactionDefNames.RemoveWhere(string.IsNullOrWhiteSpace);

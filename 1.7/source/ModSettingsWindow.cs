@@ -99,9 +99,35 @@ namespace Tunnel_Raids
         private static float DrawTunnelOptions(Rect inRect)
         {
             float y = DrawMechanoidSection(inRect);
+            y = DrawTunnelEmergenceDelay(inRect, y);
             y = DrawTerrainCheckbox(inRect, y, ref ModSettings.blockMuddyTunnelSites, "TunnelRaids.Settings.BlockMuddyLabel", "TunnelRaids.Settings.BlockMuddyTooltip");
             y = DrawTerrainCheckbox(inRect, y, ref ModSettings.blockRockyTunnelSites, "TunnelRaids.Settings.BlockRockyLabel", "TunnelRaids.Settings.BlockRockyTooltip");
             return y + Gap;
+        }
+
+        private static float DrawTunnelEmergenceDelay(Rect inRect, float y)
+        {
+            string label = "TunnelRaids.Settings.EmergenceDelayLabel".Translate();
+            float labelHeight = Mathf.Max(RowHeight, Text.CalcHeight(label, inRect.width));
+            Widgets.Label(new Rect(inRect.x, y, inRect.width, labelHeight), label);
+
+            int percent = ModSettings.tunnelEmergenceDelayPercent;
+            IntRange delay = TunnelRaidSpawner.GetScaledSpawnDelay(TR_ThingDefOf.TR_TunnelRaidSpawner.building.groundSpawnerSpawnDelay, percent);
+            string value = "TunnelRaids.Settings.EmergenceDelayValue".Translate(
+                (percent / 100f).ToString("0.0"),
+                (delay.min / 60f).ToString("0.#"),
+                (delay.max / 60f).ToString("0.#"));
+            float valueHeight = Mathf.Max(RowHeight, Text.CalcHeight(value, inRect.width));
+            Widgets.Label(new Rect(inRect.x, y + labelHeight, inRect.width, valueHeight), value);
+
+            Rect sliderRect = new Rect(inRect.x, y + labelHeight + valueHeight, inRect.width, 20f);
+            float sliderValue = Widgets.HorizontalSlider(sliderRect, percent,
+                ModSettings.MinTunnelEmergenceDelayPercent, ModSettings.MaxTunnelEmergenceDelayPercent,
+                roundTo: ModSettings.TunnelEmergenceDelayStepPercent);
+            ModSettings.tunnelEmergenceDelayPercent = ModSettings.NormalizeTunnelEmergenceDelayPercent(Mathf.RoundToInt(sliderValue));
+            TooltipHandler.TipRegion(new Rect(inRect.x, y, inRect.width, sliderRect.yMax - y),
+                "TunnelRaids.Settings.EmergenceDelayTooltip".Translate());
+            return sliderRect.yMax + 8f;
         }
 
         private static float DrawTerrainCheckbox(Rect inRect, float y, ref bool setting, string labelKey, string tooltipKey)
